@@ -5,9 +5,11 @@ machine:
     version: 6
 dependencies:
   override:
-    - ./node_modules/.bin/obt install
+    - npm install
+    - bower install
   cache_directories:
     - "node_modules"
+    - "bower_components"
 test:
   override:
     - ./node_modules/.bin/obt test
