@@ -46,12 +46,17 @@
 		&__close-btn {
 			position: relative;
 			padding: 0;
+			margin-right: 8px;
 			width: $_o-cookie-message-icon-size + 0px; // Hack to get a `px` at the end
 			height: $_o-cookie-message-icon-size + 0px;
 			border: 0;
 			background: none;
 			cursor: pointer;
 			opacity: 0.8;
+
+			@include oGridRespondTo(M) {
+				margin-right: 0;
+			};
 
 			&:before {
 				@include oIconsGetIcon(cross, oColorsGetColorFor(body, text), $_o-cookie-message-icon-size, $iconset-version: 1);
@@ -83,7 +88,7 @@
 
 		&__description {
 			@include oTypographySans($_o-cookie-message-font-scale);
-			padding: 15px;
+			padding: 0 20px 0 5px;
 			margin: 0;
 			color: oColorsGetColorFor(body, text);
 
