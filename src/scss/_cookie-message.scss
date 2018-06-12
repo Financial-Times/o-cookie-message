@@ -1,0 +1,67 @@
+
+@mixin oCookieMessage($class: 'o-cookie-message', $themes: 'all') {
+
+	// Base cookie message styles
+	.#{$class} {
+		@include oBannerBase;
+		@include oBannerThemeCompactBase;
+
+		&--closed {
+			@include oBannerClosed;
+		}
+
+		&__outer {
+			@include oBannerOuter;
+			@include oBannerThemeCompactOuter;
+		}
+		&__inner {
+			@include oBannerInner;
+			@include oBannerThemeCompactInner;
+		}
+		&__content {
+			@include oBannerContent;
+			@include oBannerThemeCompactContent;
+		}
+		&__heading {
+			@include oBannerHeading;
+			@include oBannerThemeCompactHeading;
+		}
+		&__actions {
+			@include oBannerActions;
+			@include oBannerThemeCompactActions;
+		}
+		&__action {
+			@include oBannerAction;
+			@include oBannerThemeCompactAction;
+		}
+		&__action--secondary {
+			@include oBannerActionSecondary;
+			@include oBannerThemeCompactActionSecondary;
+		}
+		&__button {
+			@include oBannerButton;
+		}
+		&__link {
+			@include oBannerLink;
+		}
+	}
+
+	// GABI: The theme code below (copied from o-banner) may be required if we have the option
+	// of a green button and switching the button positions. This is still being tested at the
+	// moment, and James should be able to fill you in
+
+	// // Theme styles
+	// @if $themes == 'all' {
+	// 	@each $theme in $_o-banner-themes {
+	// 		@include _oCookieMessageGetThemeMixin($theme, $class);
+	// 	}
+	// } @else if $themes != false  {
+	// 	@each $theme in $themes {
+	// 		@if index($_o-banner-themes, $theme) != null {
+	// 			@include _oCookieMessageGetThemeMixin($theme, $class);
+	// 		} @else {
+	// 			@error "There is no theme '#{$theme}' available in o-banner, please use one of the following: #{$_o-banner-themes}.";
+	// 		}
+	// 	}
+	// }
+}

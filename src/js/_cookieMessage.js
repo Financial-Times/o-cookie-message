@@ -1,3 +1,8 @@
+
+// GABI: This is the old cookie message code, things are done quite differently now but
+// I wanted to leave this in temporarily so that I can better understand the changes
+// in behaviour. This should be deleted before release
+
 const store = require('superstore-sync');
 
 class CookieMessage {

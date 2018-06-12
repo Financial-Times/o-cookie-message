@@ -1,1 +1,5 @@
-@include oColorsSetUseCase('o-cookie-message', 'background', 'white-40');
+
+// GABI: If we introduce themes, we'll need this file for setting color values for the
+// green button possibly. If not then we can delete this file
+
+// @include oColorsSetUseCase('o-cookie-message-button', 'background', 'white-40');
