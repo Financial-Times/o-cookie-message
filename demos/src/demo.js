@@ -8,29 +8,16 @@ function initDemos() {
 }
 
 initDemos();
+setTimeout(hideCookieMessage, 500);
 
-
-// GABI: I've commented this out for now, but it's required before launch – it makes sure that the
-// cookie isn't actually set so that the demo works
-
-// import CookieMessage from './../../main.js';
-//
-// document.addEventListener('DOMContentLoaded', function() {
-// 	document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
-// });
-//
-// document.addEventListener('oCookieMessage.ready', function() {
-// 	document.querySelector('[data-o-component="o-cookie-message-close"]').removeEventListener('click', CookieMessage.flagUserAsConsentingToCookies);
-// 	document.querySelector('[data-o-component="o-cookie-message-close"]').addEventListener('click', showNotification);
-// });
-//
-// function showNotification(){
-// 	const userNotice =`
-// 	<div class="o-cookie-message__container">
-// 		<p class="o-cookie-message__description">
-// 			<strong>Hello!</strong> normally, clicking that button will hide the cookie message for 3 months. But that would mean you wouldn't be able to see this demo anymore, which might be quite annoying. You can refresh the page to get the proper cookie message back.
-// 		</p>
-// 	</div>`;
-// 	const CookieMessageEl = document.querySelector('[data-o-component="o-cookie-message"]');
-// 	CookieMessageEl.innerHTML = userNotice;
-// }
+function hideCookieMessage() {
+	const cookieMessage = document.querySelector('.o-cookie-message');
+	const action = cookieMessage.querySelector('.o-cookie-message__action');
+	action.addEventListener('click', () => {
+		cookieMessage.innerHTML =`<div class="o-cookie-message__container">
+				<p class="o-cookie-message__description">
+					<strong>Hello!</strong> normally, clicking that button will hide the cookie message for 3 months. But that would mean you wouldn't be able to see this demo anymore, which might be quite annoying. You can refresh the page to get the proper cookie message back.
+				</p>
+			</div>`;
+	});
+}

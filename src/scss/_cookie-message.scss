@@ -1,10 +1,13 @@
-
 @mixin oCookieMessage($class: 'o-cookie-message', $themes: 'all') {
 
 	// Base cookie message styles
 	.#{$class} {
 		@include oBannerBase;
 		@include oBannerThemeCompactBase;
+
+		&--active {
+			display: block;
+		}
 
 		&--closed {
 			@include oBannerClosed;
@@ -14,33 +17,41 @@
 			@include oBannerOuter;
 			@include oBannerThemeCompactOuter;
 		}
+
 		&__inner {
 			@include oBannerInner;
 			@include oBannerThemeCompactInner;
 		}
+
 		&__content {
 			@include oBannerContent;
 			@include oBannerThemeCompactContent;
 		}
+
 		&__heading {
 			@include oBannerHeading;
 			@include oBannerThemeCompactHeading;
 		}
+
 		&__actions {
 			@include oBannerActions;
 			@include oBannerThemeCompactActions;
 		}
+
 		&__action {
 			@include oBannerAction;
 			@include oBannerThemeCompactAction;
 		}
+
 		&__action--secondary {
 			@include oBannerActionSecondary;
 			@include oBannerThemeCompactActionSecondary;
 		}
+
 		&__button {
 			@include oBannerButton;
 		}
+
 		&__link {
 			@include oBannerLink;
 		}

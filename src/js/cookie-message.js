@@ -18,7 +18,9 @@ class CookieMessage {
 
 	constructor (cookieMessageElement, options) {
 		this.cookieMessageElement = cookieMessageElement;
+		this.domain = window.location.hostname.replace('www.', '');
 
+		const redirect = window.location.href;
 		// Create a banner element
 		const cookieMessageClass = (options && options.cookieMessageClass ? options.cookieMessageClass : 'o-cookie-message');
 		this.banner = new Banner(this.cookieMessageElement, {
@@ -37,9 +39,6 @@ class CookieMessage {
 			actionSecondaryClass: `${cookieMessageClass}__action--secondary`,
 			buttonClass: `${cookieMessageClass}__button`,
 			linkClass: `${cookieMessageClass}__link`,
-
-			// GABI: I think links in here _may_ have to be configurable, so that this is usable by
-			// other teams at the FT. Ideally this would also be configurable through data attributes
 			contentLong: `
 				<header class="${cookieMessageClass}__heading">
 					<h1>Cookies on the FT</h1>
@@ -51,10 +50,56 @@ class CookieMessage {
 				</p>
 			`,
 			buttonLabel: 'Accept & continue',
-			buttonUrl: 'https://www.ft.com/__consent/consent-record-cookie?redirect={{GABI:insert-current-url}}',
+			buttonUrl: `https://consent.${this.domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${this.domain}`,
 			linkLabel: 'Manage cookies',
 			linkUrl: 'https://www.ft.com/preferences/manage-cookies'
 		});
+
+		this.showCookieMessage.bind(this)();
+	}
+
+	/**
+	 * Enables cookie setting behaviour from the FT consent service
+	 * https://github.com/Financial-Times/next-consent-proxy/tree/master/src
+	 */
+
+	updateConsent () {
+		const button = document.querySelector(`.${this.banner.options.buttonClass}`);
+		if (button) {
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
+
+				return fetch(`https://consent.${this.domain}/__consent/consent-record-cookie`, {
+					method: 'get',
+					credentials: 'include'
+				})
+				.then(this.removeCookieMessage.bind(this))
+				.catch(error => {
+					return { error };
+				});
+			});
+		}
+	}
+
+	/**
+	 * Displays cookie message banner, based on existing cookies.
+	 */
+
+	showCookieMessage () {
+			if (!document.cookie.includes("FTCookieConsentGDPR=true")) {
+			this.cookieMessageElement.classList.add(`${this.banner.options.bannerClass}--active`);
+			this.updateConsent.bind(this)();
+		} else {
+			this.removeCookieMessage.bind(this)();
+		}
+	}
+
+	/**
+	 * Removes cookie message banner.
+	 */
+
+	removeCookieMessage () {
+		this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
 	}
 
 	/**
