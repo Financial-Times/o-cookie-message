@@ -19,14 +19,16 @@ class CookieMessage {
 	constructor (cookieMessageElement, options) {
 		this.cookieMessageElement = cookieMessageElement;
 		this.domain = window.location.hostname.replace('www.', '');
-
 		const redirect = window.location.href;
+
 		// Create a banner element
 		const cookieMessageClass = (options && options.cookieMessageClass ? options.cookieMessageClass : 'o-cookie-message');
+		const theme = (options && options.theme) ? 'alternative' : null;
+
 		this.banner = new Banner(this.cookieMessageElement, {
 			autoOpen: true,
 			suppressCloseButton: true,
-
+			theme: theme,
 			bannerClass: cookieMessageClass,
 			bannerClosedClass: `${cookieMessageClass}--closed`,
 			outerClass: `${cookieMessageClass}__outer`,

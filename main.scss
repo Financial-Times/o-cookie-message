@@ -3,8 +3,8 @@
 
 @import "src/scss/color-use-cases";
 @import "src/scss/variables";
-@import "src/scss/mixins";
 @import "src/scss/cookie-message";
+@import "src/scss/mixins";
 
 @if ($o-cookie-message-is-silent == false) {
 

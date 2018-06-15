@@ -1,61 +1,11 @@
 @mixin oCookieMessage($class: 'o-cookie-message', $themes: 'all') {
+	@include oCookieMessageBase($class);
 
-	// Base cookie message styles
-	.#{$class} {
-		@include oBannerBase;
-		@include oBannerThemeCompactBase;
-
-		&--active {
-			display: block;
-		}
-
-		&--closed {
-			@include oBannerClosed;
-		}
-
-		&__outer {
-			@include oBannerOuter;
-			@include oBannerThemeCompactOuter;
-		}
-
-		&__inner {
-			@include oBannerInner;
-			@include oBannerThemeCompactInner;
-		}
-
-		&__content {
-			@include oBannerContent;
-			@include oBannerThemeCompactContent;
-		}
-
-		&__heading {
-			@include oBannerHeading;
-			@include oBannerThemeCompactHeading;
-		}
-
-		&__actions {
-			@include oBannerActions;
-			@include oBannerThemeCompactActions;
-		}
-
-		&__action {
-			@include oBannerAction;
-			@include oBannerThemeCompactAction;
-		}
-
-		&__action--secondary {
-			@include oBannerActionSecondary;
-			@include oBannerThemeCompactActionSecondary;
-		}
-
-		&__button {
-			@include oBannerButton;
-		}
-
-		&__link {
-			@include oBannerLink;
-		}
-	}
+	@if $themes == 'all' {
+		@include oCookieMessageStandard($class);
+		@include oCookieMessageAlternative($class);
+	} 
+}
 
 	// GABI: The theme code below (copied from o-banner) may be required if we have the option
 	// of a green button and switching the button positions. This is still being tested at the

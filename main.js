@@ -1,4 +1,3 @@
-
 import CookieMessage from './src/js/cookie-message';
 
 function constructAll () {

@@ -1,13 +1,16 @@
-
-import './../../main.js';
+// import './../../main.js';
+import CookieMessage from '../../main.js';
 
 function initDemos() {
 	document.addEventListener('DOMContentLoaded', () => {
 		document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
 	});
+
+	CookieMessage.init(null, {theme: 'alternative'});
 }
 
 initDemos();
+
 setTimeout(hideCookieMessage, 500);
 
 function hideCookieMessage() {
@@ -16,7 +19,7 @@ function hideCookieMessage() {
 	action.addEventListener('click', () => {
 		cookieMessage.innerHTML =`<div class="o-cookie-message__container">
 				<p class="o-cookie-message__description">
-					<strong>Hello!</strong> normally, clicking that button will hide the cookie message for 3 months. But that would mean you wouldn't be able to see this demo anymore, which might be quite annoying. You can refresh the page to get the proper cookie message back.
+					<strong>Hello!</strong> normally, clicking that button will hide the cookie message for 6 months. But that would mean you wouldn't be able to see this demo anymore, which might be quite annoying. You can refresh the page to get the proper cookie message back.
 				</p>
 			</div>`;
 	});
