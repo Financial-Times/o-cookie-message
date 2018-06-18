@@ -7,28 +7,36 @@ class CookieMessage {
 		this.domain = window.location.hostname.replace('www.', '');
 		const redirect = window.location.href;
 
-		// Create a banner element
-		const cookieMessageClass = (options && options.cookieMessageClass ? options.cookieMessageClass : 'o-cookie-message');
-		const theme = (options && options.theme) ? 'alternative' : null;
+		// Set cookie message options
+		this.options = Object.assign({}, {
+			cookieMessageClass: 'o-cookie-message',
+			theme: null,
+			acceptUrl: `https://consent.${this.domain}/__consent/consent-record-cookie`,
+			acceptUrlFallback: `https://consent.${this.domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${this.domain}`,
+			manageCookiesUrl: 'https://www.ft.com/preferences/manage-cookies',
+			consentCookieName: 'FTCookieConsentGDPR'
+		}, options || CookieMessage.getOptionsFromDom(cookieMessageElement));
+		this.options.theme = this.options.theme ? 'alternative' : null;
 
+		// Create a banner element
 		this.banner = new Banner(this.cookieMessageElement, {
 			autoOpen: true,
 			suppressCloseButton: true,
-			theme: theme,
-			bannerClass: cookieMessageClass,
-			bannerClosedClass: `${cookieMessageClass}--closed`,
-			outerClass: `${cookieMessageClass}__outer`,
-			innerClass: `${cookieMessageClass}__inner`,
-			contentClass: `${cookieMessageClass}__content`,
-			contentLongClass: `${cookieMessageClass}__content--long`,
-			contentShortClass: `${cookieMessageClass}__content--short`,
-			actionsClass: `${cookieMessageClass}__actions`,
-			actionClass: `${cookieMessageClass}__action`,
-			actionSecondaryClass: `${cookieMessageClass}__action--secondary`,
-			buttonClass: `${cookieMessageClass}__button`,
-			linkClass: `${cookieMessageClass}__link`,
+			theme: this.options.theme,
+			bannerClass: this.options.cookieMessageClass,
+			bannerClosedClass: `${this.options.cookieMessageClass}--closed`,
+			outerClass: `${this.options.cookieMessageClass}__outer`,
+			innerClass: `${this.options.cookieMessageClass}__inner`,
+			contentClass: `${this.options.cookieMessageClass}__content`,
+			contentLongClass: `${this.options.cookieMessageClass}__content--long`,
+			contentShortClass: `${this.options.cookieMessageClass}__content--short`,
+			actionsClass: `${this.options.cookieMessageClass}__actions`,
+			actionClass: `${this.options.cookieMessageClass}__action`,
+			actionSecondaryClass: `${this.options.cookieMessageClass}__action--secondary`,
+			buttonClass: `${this.options.cookieMessageClass}__button`,
+			linkClass: `${this.options.cookieMessageClass}__link`,
 			contentLong: `
-				<header class="${cookieMessageClass}__heading">
+				<header class="${this.options.cookieMessageClass}__heading">
 					<h1>Cookies on the FT</h1>
 				</header>
 				<p>
@@ -38,12 +46,12 @@ class CookieMessage {
 				</p>
 			`,
 			buttonLabel: 'Accept & continue',
-			buttonUrl: `https://consent.${this.domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${this.domain}`,
+			buttonUrl: this.options.acceptUrlFallback,
 			linkLabel: 'Manage cookies',
-			linkUrl: 'https://www.ft.com/preferences/manage-cookies'
+			linkUrl: this.options.manageCookiesUrl
 		});
 
-		this.showCookieMessage.bind(this)();
+		this.showCookieMessage();
 	}
 
 	/**
@@ -55,13 +63,15 @@ class CookieMessage {
 		if (button) {
 			button.addEventListener('click', (e) => {
 				e.preventDefault();
-
-				return fetch(`https://consent.${this.domain}/__consent/consent-record-cookie`, {
+				this.dispatchEvent('oCookieMessage.act');
+				return fetch(this.options.acceptUrl, {
 					method: 'get',
 					credentials: 'include'
 				})
 				.then(this.removeCookieMessage.bind(this))
 				.catch(error => {
+					// TODO work out whether we have to do something
+					// with this error
 					return { error };
 				});
 			});
@@ -72,11 +82,12 @@ class CookieMessage {
 	 * Displays cookie message banner, based on existing cookies.
 	 */
 	showCookieMessage () {
-			if (!document.cookie.includes("FTCookieConsentGDPR=true")) {
-			this.cookieMessageElement.classList.add(`${this.banner.options.bannerClass}--active`);
-			this.updateConsent.bind(this)();
+		if (!document.cookie.includes(`${this.options.consentCookieName}`)) {
+			this.cookieMessageElement.classList.add(`${this.options.cookieMessageClass}--active`);
+			this.dispatchEvent('oCookieMessage.view');
+			this.updateConsent();
 		} else {
-			this.removeCookieMessage.bind(this)();
+			this.removeCookieMessage();
 		}
 	}
 
@@ -84,14 +95,46 @@ class CookieMessage {
 	 * Removes cookie message banner.
 	 */
 	removeCookieMessage () {
+		this.dispatchEvent('oCookieMessage.close');
 		this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
 	}
 
 	dispatchEvent (eventName) {
-		const message = this.cookieMessageElement;
 		const e = new CustomEvent(eventName, { bubbles: true });
-		message.dispatchEvent(e);
+		this.cookieMessageElement.dispatchEvent(e);
 	}
+
+	/**
+	 * Get the data attributes from the cookieMessageElement. If the cookie message is being set up
+	 * declaratively, this method is used to extract the data attributes from the DOM.
+	 * @param {HTMLElement} cookieMessageElement - The cookie message element in the DOM
+	 */
+	static getOptionsFromDom (cookieMessageElement) {
+		if (!(cookieMessageElement instanceof HTMLElement)) {
+			return {};
+		}
+		return Object.keys(cookieMessageElement.dataset).reduce((options, key) => {
+
+			// Ignore data-o-component
+			if (key === 'oComponent') {
+				return options;
+			}
+
+			// Build a concise key and get the option value
+			const shortKey = key.replace(/^oCookieMessage(\w)(\w+)$/, (m, m1, m2) => m1.toLowerCase() + m2);
+			const value = cookieMessageElement.dataset[key];
+
+			// Try parsing the value as JSON, otherwise just set it as a string
+			try {
+				options[shortKey] = JSON.parse(value.replace(/\'/g, '"'));
+			} catch (error) {
+				options[shortKey] = value;
+			}
+
+			return options;
+		}, {});
+	}
+
 	/**
 	 * Initialise cookie message components.
 	 * @param {(HTMLElement|String)} rootElement - The root element to intialise cookie messages in, or a CSS selector for the root element
@@ -108,7 +151,7 @@ class CookieMessage {
 		}
 
 		// If the rootElement is an HTMLElement (ie it was found in the document anywhere)
-		// AND the rootElement has the data-o-component=o-banner then initialise just 1 banner (this one)
+		// AND the rootElement has the data-o-component=o-cookie-message then initialise just 1 cookie message (this one)
 		if (rootElement instanceof HTMLElement && /\bo-cookie-message\b/.test(rootElement.getAttribute('data-o-component'))) {
 			return new CookieMessage(rootElement, options);
 		}

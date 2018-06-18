@@ -21,3 +21,15 @@ function hideCookieMessage() {
 			</div>`;
 	});
 }
+
+document.body.addEventListener('oCookieMessage.view', () => {
+	console.log('THE COOKIE MESSAGE HAS BEEN VIEWED');
+});
+
+document.body.addEventListener('oCookieMessage.act', () => {
+	console.log('THE COOKIE MESSAGE HAS BEEN ACTED UPON');
+});
+
+document.body.addEventListener('oCookieMessage.close', () => {
+	console.log('THE COOKIE MESSAGE HAS BEEN CLOSED');
+});
