@@ -68,10 +68,12 @@
 	.#{$class}--alternative {
 		.#{$class} {
 			&__button {
-				@include oButtonsCustomTheme(
-				oColorsGetUseCase(o-cookie-message-alternative-button, text),
-				oColorsGetUseCase(o-cookie-message-alternative-button, background),
-				primary);
+				//TODO: revisit argument names in o-buttons
+				@include oButtonsTheme((
+					accent: oColorsGetUseCase(o-cookie-message-alternative-button, background),
+		 			background: oColorsGetUseCase(o-cookie-message-alternative-button, text),
+					colorizer: primary
+				))
 			}
 
 			&__action {

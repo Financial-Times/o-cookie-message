@@ -1,6 +1,8 @@
 // import './../../main.js';
 import CookieMessage from '../../main.js';
 
+document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com';
+
 function initDemos() {
 	document.addEventListener('DOMContentLoaded', () => {
 		document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));

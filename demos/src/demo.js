@@ -1,5 +1,7 @@
 import CookieMessage from '../../main.js';
 
+document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com; Path=/;';
+
 function initDemos() {
 	document.addEventListener('DOMContentLoaded', () => {
 		document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
@@ -23,13 +25,13 @@ function hideCookieMessage() {
 }
 
 document.body.addEventListener('oCookieMessage.view', () => {
-	console.log('THE COOKIE MESSAGE HAS BEEN VIEWED');
+	console.log('THE 🍪 MESSAGE HAS BEEN VIEWED');
 });
 
 document.body.addEventListener('oCookieMessage.act', () => {
-	console.log('THE COOKIE MESSAGE HAS BEEN ACTED UPON');
+	console.log('THE 🍪 MESSAGE HAS BEEN ACTED UPON');
 });
 
 document.body.addEventListener('oCookieMessage.close', () => {
-	console.log('THE COOKIE MESSAGE HAS BEEN CLOSED');
+	console.log('THE 🍪 MESSAGE HAS BEEN CLOSED');
 });
