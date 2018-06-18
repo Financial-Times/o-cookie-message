@@ -1,28 +1,14 @@
-@mixin oCookieMessage($class: 'o-cookie-message', $themes: 'all') {
+@mixin oCookieMessage($class: 'o-cookie-message', $theme: 'all') {
 	@include oCookieMessageBase($class);
 
-	@if $themes == 'all' {
+	@if $theme == 'all' {
 		@include oCookieMessageStandard($class);
 		@include oCookieMessageAlternative($class);
-	} 
-}
-
-	// GABI: The theme code below (copied from o-banner) may be required if we have the option
-	// of a green button and switching the button positions. This is still being tested at the
-	// moment, and James should be able to fill you in
-
-	// // Theme styles
-	// @if $themes == 'all' {
-	// 	@each $theme in $_o-banner-themes {
-	// 		@include _oCookieMessageGetThemeMixin($theme, $class);
-	// 	}
-	// } @else if $themes != false  {
-	// 	@each $theme in $themes {
-	// 		@if index($_o-banner-themes, $theme) != null {
-	// 			@include _oCookieMessageGetThemeMixin($theme, $class);
-	// 		} @else {
-	// 			@error "There is no theme '#{$theme}' available in o-banner, please use one of the following: #{$_o-banner-themes}.";
-	// 		}
-	// 	}
-	// }
+	} @else if $theme == 'standard' {
+		@include oCookieMessageStandard($class);
+	} @else if $theme == 'alternative' {
+		@include oCookieMessageAlternative($class);
+	} @else {
+		@error "There is no theme '#{$theme}' available in o-cookie-message, please use one of the following: #{$_o-cookie-message-themes}.";
+	}
 }

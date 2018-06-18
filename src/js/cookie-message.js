@@ -1,18 +1,4 @@
-
-const store = require('superstore-sync');
 const Banner = require('o-banner/src/js/banner');
-
-// GABI: This is the new cookie message code, which currently creates an o-banner instance and fills
-// in appropriate cookie data. The cookie setting behaviour isn't in place at the moment, and there
-// are some changes to how it should behave which are outlined in:
-// https://github.com/Financial-Times/o-cookie-message/issues/57
-//
-// For now I think ignore the flipped button positions and green colours, as this will probably end
-// up being a theme. So leave in the teal button/accent.
-//
-// Because the new way of doing cookie acceptance requires a form, there _may_ still be one more
-// change to o-banner which allows a form to be used for the button instead of a link. Speak to
-// James about this if you're not sure what's expected.
 
 class CookieMessage {
 
@@ -64,7 +50,6 @@ class CookieMessage {
 	 * Enables cookie setting behaviour from the FT consent service
 	 * https://github.com/Financial-Times/next-consent-proxy/tree/master/src
 	 */
-
 	updateConsent () {
 		const button = document.querySelector(`.${this.banner.options.buttonClass}`);
 		if (button) {
@@ -86,7 +71,6 @@ class CookieMessage {
 	/**
 	 * Displays cookie message banner, based on existing cookies.
 	 */
-
 	showCookieMessage () {
 			if (!document.cookie.includes("FTCookieConsentGDPR=true")) {
 			this.cookieMessageElement.classList.add(`${this.banner.options.bannerClass}--active`);

@@ -68,7 +68,10 @@
 	.#{$class}--alternative {
 		.#{$class} {
 			&__button {
-				@include oButtonsCustomTheme(oColorsGetUseCase(o-cookie-message-button, text), oColorsGetUseCase(o-cookie-message-button, background), primary);
+				@include oButtonsCustomTheme(
+				oColorsGetUseCase(o-cookie-message-alternative-button, text),
+				oColorsGetUseCase(o-cookie-message-alternative-button, background),
+				primary);
 			}
 
 			&__action {
@@ -82,15 +85,14 @@
 				@include oGridRespondTo($until: M) {
 					flex-direction: column-reverse;
 					align-items: flex-start;
-					margin-top: oTypographySpacingSize(3);
+					margin-top: 0;
 
 					.#{$class}__action {
-						margin-top: oTypographySpacingSize(3);
 						align-self: stretch;
 
 						.#{$class}__button {
 							width: 100%;
-							margin-top: oTypographySpacingSize(3);
+							margin-top: oTypographySpacingSize(4);
 						}
 					}
 				}
@@ -107,10 +109,10 @@
 			&__link--external,
 			&__link {
 				@include oTypographyLinkCustom(
-					$baseColor: oColorsGetColorFor('o-cookie-message-alternative-link', 'text'),
-					$hoverColor: oColorsGetColorFor('o-cookie-message-alternative-link', 'text'),
-					$outlineColor: oColorsGetColorFor('o-cookie-message-alternative-link', 'text'),
-					$backgroundColor: oColorsGetColorFor('o-cookie-message-alternative-link', 'background')
+					$baseColor: oColorsGetUseCase('o-cookie-message-alternative-link', 'text'),
+					$hoverColor: oColorsGetUseCase('o-cookie-message-alternative-link', 'text'),
+					$outlineColor: oColorsGetUseCase('o-cookie-message-alternative-link', 'text'),
+					$backgroundColor: oColorsGetUseCase('o-cookie-message-alternative-link', 'background')
 				);
 			}
 		}
