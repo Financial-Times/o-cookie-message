@@ -1,9 +1,12 @@
+// import './../../main.js';
 import CookieMessage from '../../main.js';
 
 function initDemos() {
 	document.addEventListener('DOMContentLoaded', () => {
 		document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
 	});
+
+	CookieMessage.init(null, {theme: 'alternative'});
 }
 
 initDemos();
