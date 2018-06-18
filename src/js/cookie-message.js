@@ -83,11 +83,15 @@ class CookieMessage {
 	/**
 	 * Removes cookie message banner.
 	 */
-
 	removeCookieMessage () {
 		this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
 	}
 
+	dispatchEvent (eventName) {
+		const message = this.cookieMessageElement;
+		const e = new CustomEvent(eventName, { bubbles: true });
+		message.dispatchEvent(e);
+	}
 	/**
 	 * Initialise cookie message components.
 	 * @param {(HTMLElement|String)} rootElement - The root element to intialise cookie messages in, or a CSS selector for the root element

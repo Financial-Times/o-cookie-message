@@ -32,10 +32,20 @@ You must either construct an `o-cookie-message` object or fire the `o.DOMContent
 
 #### Constructing an o-cookie-message
 
+There are two available variations of o-cookie-message: `standard` and `alternative`.
+
+When you are using the markup outlined about, if you would like to initialise a `standard` cookie message, you will need to implement this code:
 ```js
 const oCookieMessage = require('o-cookie-message');
 
 const cookieMessage = new oCookieMessage();
+```
+
+For an `alternative` cookie message, you will need the following:
+```js
+const oCookieMessage = require('o-cookie-message');
+
+const cookieMessage = new oCookieMessage(null, { theme: 'alternative' });
 ```
 
 #### Firing an oDomContentLoaded event
@@ -62,6 +72,13 @@ $o-cookie-message-is-silent: false;
 @import 'o-cookie-message/main';
 ```
 
+The above code will include both style options that come with o-cookie-message; [`standard`]{https://registry.origami.ft.com/components/o-cookie-message#demo-approved-cookie-banner} and [`alternative`](https://registry.origami.ft.com/components/o-cookie-message#demo-approved-alternative-cookie-banner). If you would like to incorporate just one style, you can include it by _not_ setting the component to silent, and then using this mixin with the name of the theme you want to display:
+
+```sass
+@import 'o-cookie-message/main';
+
+@include oCookieMessage($class: 'my-cookie-message', $theme: alternative);
+```
 
 ### Customising o-cookie-message HTML
 
@@ -86,6 +103,11 @@ To prevent o-cookie-message from messing with the inner HTML of your o-cookie-me
 ```
 
 ## Migration guide
+### Migrating from 3.X.X to 4.X.X
+The 4.0.0 release changes the way cookies are set for FT products. It relies on an [internal consent API](https://github.com/Financial-Times/next-consent-proxy/), and `o-cookie-message` will make a call to an endpoint within the API when consent is given.
+
+It no longer has a direct dependency on any component other than `o-banner`, which is now responsible for the construction of the cookie message.
+
 ### Migrating from 2.X.X to 3.X.X
 The 3.0.0 introduces the new majors of o-colors and o-typography and a new dependency on o-normalise. Updating to this new version will mean updating any other components that you have which are using o-colors or o-typography.
 There are some design tweaks but no other breaking changes in this release.
@@ -107,7 +129,7 @@ The 2.0.0 release changes the default behaviour of o-cookie-message. Instead of 
 </div>
 ```
 
-So all you need now is:
+What you need now is:
 
 ```html
 <div data-o-component="o-cookie-message" class='o-cookie-message o-cookie-message--banner-centric'>
