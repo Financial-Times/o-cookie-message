@@ -12,6 +12,7 @@ describe("Cookie Message", () => {
 	describe('new cookie banner', () => {
 
 		beforeEach(() => {
+			document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com';
 			fixtures.generateHTML('standard');
 		});
 
