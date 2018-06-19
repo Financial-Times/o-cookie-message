@@ -22,6 +22,7 @@ Use the following HTML to get a full width banner with the legal approved cookie
 ```diff
 <div data-o-component="o-cookie-message"></div>
 ```
+If you would like to construct an alternative cookie message, declare `data-o=cookie-message-theme="alternative"` on the div in the markup above, with the same JavaScript.
 
 ### JavaScript
 
@@ -34,13 +35,20 @@ You must either construct an `o-cookie-message` object or fire the `o.DOMContent
 There are two available variations of o-cookie-message: `standard` and `alternative`.
 
 If you would like to initialise a `standard` cookie message, you will need to implement the following:
+
 ```js
 const oCookieMessage = require('o-cookie-message');
 
 const cookieMessage = new oCookieMessage();
 ```
 
-If you would like to construct an alternative cookie message, declare `data-o=cookie-message-theme="alternative"` on the div in the markup above, with the same JavaScript.
+If you would like to initialise a `alternative` cookie message without declaring the data attribute in the markup, you will need to implement the following:
+
+```js
+const oCookieMessage = require('o-cookie-message');
+const cookieMessage = new oCookieMessage(null, { theme: 'alternative' });
+```
+
 
 #### Firing an oDomContentLoaded event
 

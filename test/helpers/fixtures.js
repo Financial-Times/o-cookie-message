@@ -51,7 +51,7 @@ export const html = {
 
 				<div class="o-cookie-message__actions">
 					<div class="o-cookie-message__action">
-						<a href="https://consent.local.ft.com/__consent/consent-record-cookie?redirect=http://local.ft.com:9876/debug.html&amp;cookieDomain=.local.ft.com" class="o-cookie-message__button">Accept &amp; continue</a>
+						<a href="https://consent.localhost/__consent/consent-record-cookie?redirect=http://localhost:9876/context.html&amp;cookieDomain=.localhost" class="o-cookie-message__button">Accept &amp; continue</a>
 					</div>
 
 			<div class="o-cookie-message__action o-cookie-message__action--secondary">
@@ -81,7 +81,7 @@ export const html = {
 
 				<div class="o-cookie-message__actions">
 					<div class="o-cookie-message__action">
-						<a href="https://consent.local.ft.com/__consent/consent-record-cookie?redirect=http://local.ft.com:9876/debug.html&amp;cookieDomain=.local.ft.com" class="o-cookie-message__button">Accept &amp; continue</a>
+						<a href="https://consent.localhost/__consent/consent-record-cookie?redirect=http://localhost:9876/context.html&amp;cookieDomain=.localhost" class="o-cookie-message__button">Accept &amp; continue</a>
 					</div>
 
 			<div class="o-cookie-message__action o-cookie-message__action--secondary">

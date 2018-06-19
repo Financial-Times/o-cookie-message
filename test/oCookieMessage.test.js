@@ -12,7 +12,7 @@ describe("Cookie Message", () => {
 	describe('new cookie banner', () => {
 
 		beforeEach(() => {
-			document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com';
+			document.cookie = `FTCookieConsentGDPR=; Max-Age=-9999999999;; Path=/`;
 			fixtures.generateHTML('standard');
 		});
 
@@ -69,12 +69,12 @@ describe("Cookie Message", () => {
 	describe('event', () => {
 		describe('when consent cookies are set', () => {
 			beforeEach(() => {
-				document.cookie = 'FTCookieConsentGDPR=true; Max-Age=5; Domain=.ft.com';
+				document.cookie = 'FTCookieConsentGDPR=true; Max-Age=500;';
 				fixtures.generateHTML('standard');
 			});
 
 			afterEach(() => {
-				document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com';
+				document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999;';
 				fixtures.reset();
 			});
 
@@ -99,12 +99,12 @@ describe("Cookie Message", () => {
 
 		describe('when consent cookies are not set', () => {
 			beforeEach(() => {
-				document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com';
+				document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999;';
 				fixtures.generateHTML('standard');
 			});
 
 			afterEach(() => {
-				document.cookie = 'FTCookieConsentGDPR=true; Max-Age=5; Domain=.ft.com';
+				document.cookie = 'FTCookieConsentGDPR=true; Max-Age=500;';
 				fixtures.reset();
 			});
 
