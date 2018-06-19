@@ -19,9 +19,8 @@ All FT websites must have a cookie message. Using o-cookie-message will ensure y
 
 Use the following HTML to get a full width banner with the legal approved cookie message.
 
-```html
-<div data-o-component="o-cookie-message" class='o-cookie-message o-cookie-message--banner-centric'>
-</div>
+```diff
+<div data-o-component="o-cookie-message"></div>
 ```
 
 ### JavaScript
@@ -34,19 +33,13 @@ You must either construct an `o-cookie-message` object or fire the `o.DOMContent
 
 There are two available variations of o-cookie-message: `standard` and `alternative`.
 
-When you are using the markup outlined about, if you would like to initialise a `standard` cookie message, you will need to implement this code:
+When you are using the markup outlined above, if you would like to initialise a `standard` cookie message, you will need to implement this code:
 ```js
 const oCookieMessage = require('o-cookie-message');
 
 const cookieMessage = new oCookieMessage();
 ```
-
-For an `alternative` cookie message, you will need the following:
-```js
-const oCookieMessage = require('o-cookie-message');
-
-const cookieMessage = new oCookieMessage(null, { theme: 'alternative' });
-```
+If you would like to construct an alternative cookie message, declare `data-o=cookie-message-theme="alternative"` on the div in the markup above.
 
 #### Firing an oDomContentLoaded event
 
@@ -58,10 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 #### Events
 
-You may listen to two events that bubble out from the oCookieMessage DOM element:-
+You may listen to three events that bubble out from the oCookieMessage DOM element:-
 
-- `oCookieMessage.ready` is emitted when the component has finished initialising.
-- `oCookieMessage.accepted` is emitted when the user accepts the cookie message. It is not emitted if the user has already accepted cookies. This is intended to be used to allow developers to initialise their tracking logic once the user has given consent.
+- `oCookieMessage.view` is emitted when the component has finished initialising and is displayed in the window.
+- `oCookieMessage.act` is emitted when the user accepts cookies and gives consent.
+- `oCookieMessage.close` is emitted when the component is removed from the DOM.
 
 ### Sass
 
@@ -72,7 +66,7 @@ $o-cookie-message-is-silent: false;
 @import 'o-cookie-message/main';
 ```
 
-The above code will include both style options that come with o-cookie-message; [`standard`]{https://registry.origami.ft.com/components/o-cookie-message#demo-approved-cookie-banner} and [`alternative`](https://registry.origami.ft.com/components/o-cookie-message#demo-approved-alternative-cookie-banner). If you would like to incorporate just one style, you can include it by _not_ setting the component to silent, and then using this mixin with the name of the theme you want to display:
+The above code will include both style options that come with o-cookie-message; [`standard`](https://registry.origami.ft.com/components/o-cookie-message#demo-approved-cookie-banner) and [`alternative`](https://registry.origami.ft.com/components/o-cookie-message#demo-approved-alternative-cookie-banner). If you would like to incorporate just one style, you can include it by _not_ setting the component to silent, and then using this mixin with the name of the theme you want to display:
 
 ```sass
 @import 'o-cookie-message/main';
@@ -84,29 +78,39 @@ The above code will include both style options that come with o-cookie-message; 
 
 The default behaviour for this component is to populate any div with a `data-o-component` attribute of `o-cookie-message` with some HTML and a cookie message approved by the FT legal team.
 
-If you need a different message, you can instruct the o-cookie-message JavaScript NOT to populate the o-cookie-message div, and instead you can put in any HTML you like.
-To prevent o-cookie-message from messing with the inner HTML of your o-cookie-message div, add a second data attribute:
-
+If you need a different message, this can be added with HTML of your choosing. For example:
 ```html
-<div data-o-component="o-cookie-message"
-	data-o-cookie-message-use-custom-html="true"
-	class='o-cookie-message o-cookie-message--banner-centric'>
-	<p class="o-cookie-message__description">
-		Exciting custom cookie message!
-	</p>
-	<div class="o-cookie-message__close-btn-container">
-		<button class="o-cookie-message__close-btn" data-o-component="o-cookie-message-close">
-			<span class="o-cookie-message__close-btn-label">Close</span>
-		</button>
-	</div>
+<div data-o-component="o-cookie-message">
+	<header>
+		<h1>My Cookies</h1>
+	</header>
+	<p>A message about those specific cookies, here.</p>
 </div>
 ```
+o-cookie-message will incorporate that HTML into its content, and build the rest of the banner normally.
 
 ## Migration guide
 ### Migrating from 3.X.X to 4.X.X
 The 4.0.0 release changes the way cookies are set for FT products. It relies on an [internal consent API](https://github.com/Financial-Times/next-consent-proxy/), and `o-cookie-message` will make a call to an endpoint within the API when consent is given.
 
 It no longer has a direct dependency on any component other than `o-banner`, which is now responsible for the construction of the cookie message.
+
+The markup has changed for the banner. When using o-cookie-message imperatively, the correct markup is:
+```diff
+-<div data-o-component="o-cookie-message" class='o-cookie-message o-cookie-message--banner-centric'>
++<div data-o-component="o-cookie-message">
+</div>
+```
+
+o-cookie-message events have changed to:
+```diff
+-oCookieMessage.ready
++oCookieMessage.view
+-oCookieMessage.accepted
++oCookieMessage.act
++oCookieMessage.close
+```
+When using custom HTML, declaring `data-o-cookie-message-use-custom-html="true"` is no longer necessary.
 
 ### Migrating from 2.X.X to 3.X.X
 The 3.0.0 introduces the new majors of o-colors and o-typography and a new dependency on o-normalise. Updating to this new version will mean updating any other components that you have which are using o-colors or o-typography.
