@@ -30,7 +30,6 @@
 		{
 			"title": "Approved Alternative Cookie Banner",
 			"name": "alternative-cookie-message",
-			"js": "demos/src/demo-alternative.js",
 			"template": "demos/src/alternative-cookie-message.mustache",
 			"hidden": false,
 			"description": "This cookie banner is a visual variant on the approved version for all FT products and contains links back to the FT's cookie policy. The copy in the banner has been approved by the FT's legal team."
