@@ -33,13 +33,14 @@ You must either construct an `o-cookie-message` object or fire the `o.DOMContent
 
 There are two available variations of o-cookie-message: `standard` and `alternative`.
 
-When you are using the markup outlined above, if you would like to initialise a `standard` cookie message, you will need to implement this code:
+If you would like to initialise a `standard` cookie message, you will need to implement the following:
 ```js
 const oCookieMessage = require('o-cookie-message');
 
 const cookieMessage = new oCookieMessage();
 ```
-If you would like to construct an alternative cookie message, declare `data-o=cookie-message-theme="alternative"` on the div in the markup above.
+
+If you would like to construct an alternative cookie message, declare `data-o=cookie-message-theme="alternative"` on the div in the markup above, with the same JavaScript.
 
 #### Firing an oDomContentLoaded event
 

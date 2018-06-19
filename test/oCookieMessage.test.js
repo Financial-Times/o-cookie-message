@@ -1,10 +1,7 @@
 /* eslint-env mocha */
-
-import sinon from 'sinon/pkg/sinon';
 import proclaim from 'proclaim';
 
 import * as fixtures from './helpers/fixtures';
-
 import CookieMessage from './../src/js/cookie-message';
 
 const flatten = string => string.replace(/\s/g, '');
@@ -24,14 +21,14 @@ describe("Cookie Message", () => {
 
 		it('initialises with default options', () => {
 			cookieMessage = CookieMessage.init();
-			proclaim.deepStrictEqual(cookieMessage.options, CookieMessage.defaultOptions)
+			proclaim.deepStrictEqual(cookieMessage.options, CookieMessage.defaultOptions);
 		});
 
 		it('initialises with custom options', () => {
 			const customOpts = {
 				cookieMessageClass: 'my-cookie-message',
 				FTCookieConsentGDPR: 'COOKIE'
-			}
+			};
 			cookieMessage = CookieMessage.init(null, customOpts);
 			proclaim.deepStrictEqual(cookieMessage.options, Object.assign({}, CookieMessage.defaultOptions, customOpts));
 		});
@@ -40,7 +37,7 @@ describe("Cookie Message", () => {
 			fixtures.generateHTML('domAttributes');
 			const domAttributes = {
 				acceptUrl: 'example.com'
-			}
+			};
 
 			cookieMessage = CookieMessage.init();
 			proclaim.deepStrictEqual(cookieMessage.options, Object.assign({}, CookieMessage.defaultOptions, domAttributes));

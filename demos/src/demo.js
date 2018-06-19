@@ -1,4 +1,4 @@
-import CookieMessage from '../../main.js';
+import '../../main.js';
 
 document.cookie = 'FTCookieConsentGDPR=; Max-Age=-9999999999; Domain=.ft.com; Path=/;';
 

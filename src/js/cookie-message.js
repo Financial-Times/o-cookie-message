@@ -12,7 +12,7 @@ class CookieMessage {
 			acceptUrlFallback: `https://consent.${domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${domain}`,
 			manageCookiesUrl: 'https://www.ft.com/preferences/manage-cookies',
 			consentCookieName: 'FTCookieConsentGDPR'
-		}
+		};
 	}
 
 	constructor (cookieMessageElement, options) {

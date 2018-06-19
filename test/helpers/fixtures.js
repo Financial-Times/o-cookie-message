@@ -19,7 +19,7 @@ function insert(html) {
 	sandboxEl.innerHTML = html;
 }
 
-export function generateHTML(type) { insert(html[type]) };
+export function generateHTML(type) { insert(html[type]); }
 
 export const html = {
 	standard: `<div data-o-component="o-cookie-message" class='o-cookie-message'></div>`,
@@ -92,4 +92,4 @@ export const html = {
 			</div>
 		</div>
 	</div>`
-}
+};
