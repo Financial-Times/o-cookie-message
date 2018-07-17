@@ -50,7 +50,7 @@ class CookieMessage {
 	//TODO: remove when time is up — https://github.com/Financial-Times/o-cookie-message/issues/65
 	displayPrivacyMessage(position) {
 		if(this.options.privacyMessage) {
-			return new PrivacyPolicyMessage(this.cookieMessageElement, position);
+			return new PrivacyPolicyMessage(this.cookieMessageElement, this.options.cookieMessageClass, position);
 		}
 	}
 
