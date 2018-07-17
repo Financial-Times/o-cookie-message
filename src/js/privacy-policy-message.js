@@ -11,13 +11,13 @@ class PrivacyPolicyMessage {
 
 	buildElement () {
 		let policyMessageEl = document.createElement('div');
+		policyMessageEl.classList.add('privacy-policy-message', 'o-cookie-message__inner');
 		policyMessageEl.innerHTML = `
-			<header class="fuuuuuuu__heading">
-				<h1>Privacy</h1>
-			</header>
+			<h5>Privacy</h5>
 			<p>
 				We take your privacy as seriously as we take our journalism. Please review our updated
-				<a href="">privacy</a> and <a href="">cookie</a> policies.
+				<a href="https://help.ft.com/help/legal-privacy/privacy/" class="o-cookie-message__link o-cookie-message__link--external" target="_blank" rel="noopener">privacy</a> and
+				<a href="https://help.ft.com/help/legal-privacy/cookies/" class="o-cookie-message__link o-cookie-message__link--external" target="_blank" rel="noopener">cookie</a> policies.
 			</p>
 		`;
 
@@ -25,22 +25,14 @@ class PrivacyPolicyMessage {
 	}
 
 	render () {
-		//cookieMessageEl.visible?
+		//cookieMessageEl visible?
 		if (this.position === 'top') {
-			// yes — position over message
-			this.policyMessageEl.style.position = 'fixed';
+			// yes — position over cookie message
 			this.policyMessageEl.style.bottom = this.cookieMessageEl.clientHeight + 'px';
-			this.policyMessageEl.style.margin = '20px';
-			this.policyMessageEl.style.width = '50%';
-
 			document.body.insertBefore(this.policyMessageEl, this.cookieMessageEl)
 		} else {
-			//no — position in place of messages
-			// yes — position over message
-			this.policyMessageEl.style.position = 'fixed';
+			//no — position in place of cookie message
 			this.policyMessageEl.style.bottom = 0;
-			this.policyMessageEl.style.margin = '20px';
-			this.policyMessageEl.style.width = '50%';
 			document.body.append(this.policyMessageEl);
 		}
 	}

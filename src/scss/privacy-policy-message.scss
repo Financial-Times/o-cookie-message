@@ -1,1 +1,19 @@
 //TODO: remove file when time is up — https://github.com/Financial-Times/o-cookie-message/issues/65
+
+
+.privacy-policy-message.o-cookie-message__inner {
+	box-sizing: border-box;
+	position: fixed;
+	margin: 20px;
+	padding: 20px 40px;
+	width: 50%;
+
+	h5 {
+		@include oTypographyProductHeadingLevel5;
+		@include oTypographyMargin($bottom: 2);
+	}
+
+	p {
+		margin: 0;
+	}
+}
