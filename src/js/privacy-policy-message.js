@@ -1,4 +1,5 @@
 //TODO: remove file when time is up — https://github.com/Financial-Times/o-cookie-message/issues/65
+const store = require('superstore-sync');
 
 class PrivacyPolicyMessage {
 	constructor (cookieMessageElement, baseClass, position) {
@@ -8,8 +9,10 @@ class PrivacyPolicyMessage {
 			baseClass
 		};
 
-		this.policyMessageEl = this.buildElement();
-		this.render();
+		if (!store.local.get('PRIVACY_POLICY_DISMISSED')) {
+			this.policyMessageEl = this.buildElement();
+			this.render();
+		}
 	}
 
 	buildElement () {
@@ -39,6 +42,7 @@ class PrivacyPolicyMessage {
 
 		// Add event listeners
 		closeButton.addEventListener('click', event => {
+			store.local.set('PRIVACY_POLICY_DISMISSED', true);
 			this.removePrivacyPolicyMessage();
 			event.preventDefault();
 		});
