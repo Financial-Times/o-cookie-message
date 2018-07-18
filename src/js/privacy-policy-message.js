@@ -57,13 +57,13 @@ class PrivacyPolicyMessage {
 	render () {
 		if (this.options.position === 'top') {
 			this.policyMessageEl.style.bottom = this.cookieMessageEl.clientHeight + 'px';
-			document.body.insertBefore(this.policyMessageEl, this.cookieMessageEl)
+			document.body.insertBefore(this.policyMessageEl, this.cookieMessageEl);
 		} else {
 			this.policyMessageEl.style.bottom = 0;
 			document.body.append(this.policyMessageEl);
 		}
 
-		this.policyMessageEl.classList.add(`privacy-policy-message__${this.options.position}`)
+		this.policyMessageEl.classList.add(`privacy-policy-message__${this.options.position}`);
 	}
 }
 
