@@ -14,8 +14,9 @@ class CookieMessage {
 		const redirect = window.location.href;
 		return {
 			cookieMessageClass: 'o-cookie-message',
-			theme: null,
-			acceptUrl: `https://consent.${domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${domain}`,
+      theme: null,
+			acceptUrl: `https://consent.${domain}/__consent/consent-record-cookie?cookieDomain=.${domain}`,
+			acceptUrlFallback: `https://consent.${domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${domain}`,
 			manageCookiesUrl: `https://cookies.${domain}/preferences/manage-cookies`,
 			consentCookieName: 'FTCookieConsentGDPR',
 
@@ -83,7 +84,7 @@ class CookieMessage {
 					</p>
 				`,
 				buttonLabel: 'Accept & continue',
-				buttonUrl: this.options.acceptUrl,
+				buttonUrl: this.options.acceptUrlFallback,
 				linkLabel: 'Manage cookies',
 				linkUrl: this.options.manageCookiesUrl
 			});
