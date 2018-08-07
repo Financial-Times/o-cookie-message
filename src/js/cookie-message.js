@@ -8,7 +8,7 @@ class CookieMessage {
 	static get defaultOptions() {
 		let domain = 'ft.com';
 		if (!/\.ft\.com$/i.test(window.location.hostname)) {
-      // replace www or subdomain
+			// replace www or subdomain
 			domain = window.location.hostname.replace(/^(.*?)\./, '');
 		}
 		const redirect = window.location.href;
