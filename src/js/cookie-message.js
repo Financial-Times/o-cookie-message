@@ -16,7 +16,6 @@ class CookieMessage {
 			cookieMessageClass: 'o-cookie-message',
 			theme: null,
 			acceptUrl: `https://consent.${domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${domain}`,
-			acceptUrlFallback: `https://consent.${domain}/__consent/consent-record-cookie`,
 			manageCookiesUrl: `https://cookies.${domain}/preferences/manage-cookies`,
 			consentCookieName: 'FTCookieConsentGDPR',
 
@@ -84,7 +83,7 @@ class CookieMessage {
 					</p>
 				`,
 				buttonLabel: 'Accept & continue',
-				buttonUrl: this.options.acceptUrlFallback,
+				buttonUrl: this.options.acceptUrl,
 				linkLabel: 'Manage cookies',
 				linkUrl: this.options.manageCookiesUrl
 			});
