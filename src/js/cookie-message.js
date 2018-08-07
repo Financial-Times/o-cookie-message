@@ -14,7 +14,7 @@ class CookieMessage {
 		const redirect = window.location.href;
 		return {
 			cookieMessageClass: 'o-cookie-message',
-      theme: null,
+			theme: null,
 			acceptUrl: `https://consent.${domain}/__consent/consent-record-cookie?cookieDomain=.${domain}`,
 			acceptUrlFallback: `https://consent.${domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${domain}`,
 			manageCookiesUrl: `https://cookies.${domain}/preferences/manage-cookies`,
