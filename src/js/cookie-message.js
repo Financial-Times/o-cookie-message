@@ -6,10 +6,12 @@ const PrivacyPolicyMessage = require('./privacy-policy-message');
 class CookieMessage {
 
 	static get defaultOptions() {
-		let domain = 'ft.com';
+    let domain = 'ft.com';
+    let manageCookiesPath = 'manage-cookies';
 		if (!/\.ft\.com$/i.test(window.location.hostname)) {
 			// replace www or subdomain
-			domain = window.location.hostname.replace(/^(.*?)\./, '');
+      domain = window.location.hostname.replace(/^(.*?)\./, '');
+      manageCookiesPath = 'cookies';
 		}
 		const redirect = window.location.href;
 		return {
@@ -17,7 +19,7 @@ class CookieMessage {
 			theme: null,
 			acceptUrl: `https://consent.${domain}/__consent/consent-record-cookie?cookieDomain=.${domain}`,
 			acceptUrlFallback: `https://consent.${domain}/__consent/consent-record-cookie?redirect=${redirect}&cookieDomain=.${domain}`,
-			manageCookiesUrl: `https://cookies.${domain}/preferences/cookies?redirect=${redirect}&cookieDomain=.${domain}`,
+			manageCookiesUrl: `https://cookies.${domain}/preferences/${manageCookiesPath}?redirect=${redirect}&cookieDomain=.${domain}`,
 			consentCookieName: 'FTCookieConsentGDPR',
 
 			//TODO: remove when time is up — https://github.com/Financial-Times/o-cookie-message/issues/65
