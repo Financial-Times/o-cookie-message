@@ -1,8 +1,8 @@
 /* eslint-env mocha */
-import proclaim from 'proclaim';
+const proclaim = require('proclaim');
 
-import * as fixtures from './helpers/fixtures';
-import CookieMessage from './../src/js/cookie-message';
+const fixtures = require('./helpers/fixtures');
+const CookieMessage = require('./../src/js/cookie-message');
 
 const flatten = string => string.replace(/\s/g, '');
 
