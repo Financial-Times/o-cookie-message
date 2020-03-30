@@ -66,7 +66,7 @@ class CookieMessage {
 
 		const defaultContent = `
 <header class="o-cookie-message__heading">
-	<h1>Cookies on the FT</h1>
+	<h2>Cookies on the FT</h2>
 </header>
 <p>
 	We use <a href="http://help.ft.com/help/legal-privacy/cookies/" class="o-cookie-message__link o-cookie-message__link--external" target="_blank" rel="noopener">cookies</a> for a number of reasons, such as keeping FT Sites reliable and secure, personalising content and ads, providing social media features and to analyse how our Sites are used.

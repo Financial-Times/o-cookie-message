@@ -39,7 +39,7 @@ export const html = {
 			<div class="o-cookie-message__content">
 
 			<header class="o-cookie-message__heading">
-				<h1>Cookies on the FT</h1>
+				<h2>Cookies on the FT</h2>
 			</header>
 			<p>
 				We use <a href="http://help.ft.com/help/legal-privacy/cookies/" class="o-cookie-message__link o-cookie-message__link--external" target="_blank" rel="noopener">cookies</a>
@@ -69,7 +69,7 @@ export const html = {
 			<div class="o-cookie-message__content">
 
 			<header class="o-cookie-message__heading">
-				<h1>Cookies on the FT</h1>
+				<h2>Cookies on the FT</h2>
 			</header>
 			<p>
 				We use <a href="http://help.ft.com/help/legal-privacy/cookies/" class="o-cookie-message__link o-cookie-message__link--external" target="_blank" rel="noopener">cookies</a>

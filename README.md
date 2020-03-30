@@ -99,7 +99,7 @@ If you need a different message, this can be added with HTML of your choosing. F
 ```html
 <div data-o-component="o-cookie-message">
 	<header>
-		<h1>My Cookies</h1>
+		<h2>My Cookies</h2>
 	</header>
 	<p>A message about those specific cookies, here.</p>
 </div>
