@@ -6,12 +6,17 @@ All FT websites must have a cookie message. Using o-cookie-message will ensure y
 - [Usage](#usage)
 - [Usage](#usage)
 - [Usage](#usage)
+- [Usage](#usage)
 - [Markup](#markup)
 - [JavaScript](#javascript)
 - [Sass](#sass)
 - [Migration](#migration)
 - [Contact](#contact)
 - [Licence](#licence)
+
+## Usage
+
+Check out [how to include Origami components in your project](https://origami.ft.com/docs/components/#including-origami-components-in-your-project) to get started with `o-cookie-message`.
 
 ## Usage
 
