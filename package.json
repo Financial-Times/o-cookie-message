@@ -1,5 +1,5 @@
 {
-    "name": "o-cookie-message",
+    "name": "@financial-times/o-cookie-message",
     "devDependencies": {
         "eslint": "^7.8.1",
         "eslint-config-origami-component": "^2.1.0",
