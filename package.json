@@ -12,16 +12,16 @@
     },
     "main": "main.js",
     "peerDependencies": {
-        "@financial-times/o-buttons": "^100.0.0-5",
-        "@financial-times/o-spacing": "^100.0.0-5",
-        "@financial-times/o-typography": "^100.0.0-5",
-        "@financial-times/o-viewport": "^100.0.0-5",
-        "@financial-times/o-visual-effects": "^100.0.0-5",
+        "@financial-times/o-buttons": "^100.0.0-6",
+        "@financial-times/o-spacing": "^100.0.0-6",
+        "@financial-times/o-typography": "^100.0.0-6",
+        "@financial-times/o-viewport": "^100.0.0-6",
+        "@financial-times/o-visual-effects": "^100.0.0-6",
         "superstore-sync": "^2.1.1"
     },
     "description": "The cookie message and behaviour approved by the FT's legal team. All FT websites must have a cookie message. Using o-cookie-message will ensure your site is compliant according to EU regulatory law.",
     "publishConfig": {
         "registry": "http://localhost:4873"
     },
-    "version": "100.0.0-5"
+    "version": "100.0.0-6"
 }
