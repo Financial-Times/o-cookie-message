@@ -183,8 +183,8 @@ class CookieMessage {
 			return {};
 		}
 		return Object.keys(cookieMessageElement.dataset).reduce((options, key) => {
-			// Ignore data-o-component
-			if (key === 'oComponent') {
+			// Ignore keys which are not in the component's namespace
+			if (!key.match(/^oCookieMessage(\w)(\w+)$/)) {
 				return options;
 			}
 
