@@ -56,12 +56,20 @@ class CookieMessage {
 
 		this.options.theme = this.options.theme ? 'alternative' : null;
 
-		if (this.shouldShowCookieMessage()) {
-			this.createCookieMessage();
-			this.showCookieMessage();
-		} else {
-			this.removeCookieMessage();
-		}
+		window.addEventListener("pageshow", (event) => {
+			// `bfcache` means that server-sent cookies like FTConsentGDPR 
+			// aren't available to users swiping back
+			if (event.persisted === true) {
+				return window.location.reload();
+			}
+
+			if (this.shouldShowCookieMessage()) {
+				this.createCookieMessage();
+				this.showCookieMessage();
+			} else {
+				this.removeCookieMessage();
+			}
+		});
 	}
 
 	createCookieMessage() {
