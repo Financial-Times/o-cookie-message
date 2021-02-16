@@ -56,17 +56,15 @@ class CookieMessage {
 
 		this.options.theme = this.options.theme ? 'alternative' : null;
 
-		window.addEventListener("pageshow", (event) => {
-			// If the FTConsentGDPR cookie is readable at this point we can omit this clause
-			// The persisted property being true indicates that the webpage was loaded from the browsers cache.
-			if (event.persisted === true) {
-				return window.location.reload();
-			}
+		if (this.shouldShowCookieMessage()) {
+			this.createCookieMessage();
+			this.showCookieMessage();
+		} else {
+			this.removeCookieMessage();
+		}
 
-			if (this.shouldShowCookieMessage()) {
-				this.createCookieMessage();
-				this.showCookieMessage();
-			} else {
+		window.addEventListener("pageshow", (event) => {
+			if (event.persisted === true && this.shouldShowCookieMessage() === false) {
 				this.removeCookieMessage();
 			}
 		});
@@ -173,7 +171,13 @@ class CookieMessage {
 	 */
 	removeCookieMessage() {
 		this.dispatchEvent('oCookieMessage.close');
-		this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
+
+		try {
+			this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
+		}
+		catch (err) {
+			// cookieMessageElement or its parentNode has already been removed
+		}
 	}
 
 	dispatchEvent(eventName) {
