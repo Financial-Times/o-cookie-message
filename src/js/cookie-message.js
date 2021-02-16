@@ -170,10 +170,9 @@ class CookieMessage {
 	 * Removes cookie message banner.
 	 */
 	removeCookieMessage() {
-		this.dispatchEvent('oCookieMessage.close');
-
 		try {
 			this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
+			this.dispatchEvent('oCookieMessage.close');
 		}
 		catch (err) {
 			// cookieMessageElement or its parentNode has already been removed
