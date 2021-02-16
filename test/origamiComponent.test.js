@@ -4,7 +4,7 @@
 import * as fixtures from './helpers/fixtures.js';
 import oCookieMessage from '../main.js';
 
-describe.skip("oCookieMessage", () => {
+describe("oCookieMessage", () => {
 	beforeEach(() => {
 		fixtures.generateHTML('standard');
 	});
