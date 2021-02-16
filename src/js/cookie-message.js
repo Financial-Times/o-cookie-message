@@ -58,6 +58,7 @@ class CookieMessage {
 
 		window.addEventListener("pageshow", (event) => {
 			// If the FTConsentGDPR cookie is readable at this point we can omit this clause
+			// The persisted property being true indicates that the webpage was loaded from the browsers cache.
 			if (event.persisted === true) {
 				return window.location.reload();
 			}
