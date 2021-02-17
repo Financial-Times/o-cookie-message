@@ -65,7 +65,7 @@ class CookieMessage {
 
 		window.addEventListener("pageshow", (event) => {
 			if (event.persisted === true && this.shouldShowCookieMessage() === false) {
-				this.removeCookieMessage();
+				return this.removeCookieMessage();
 			}
 		});
 	}
@@ -170,9 +170,10 @@ class CookieMessage {
 	 * Removes cookie message banner.
 	 */
 	removeCookieMessage() {
+		this.dispatchEvent('oCookieMessage.close');
+
 		try {
 			this.cookieMessageElement.parentNode.removeChild(this.cookieMessageElement);
-			this.dispatchEvent('oCookieMessage.close');
 		}
 		catch (err) {
 			// cookieMessageElement or its parentNode has already been removed
