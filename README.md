@@ -1,5 +1,11 @@
 # o-cookie-message
 
+***
+
+**This component has moved to the [Origami Component System](https://github.com/Financial-Times/origami).**
+
+***
+
 The cookie message and behaviour approved by the FT's legal team.
 All FT websites must have a cookie message. Using o-cookie-message will ensure your site is compliant.
 
